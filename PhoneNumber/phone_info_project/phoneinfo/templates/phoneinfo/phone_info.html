@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Info</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Phone Information</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="number" placeholder="Enter phone number with +__" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if number %}
+            <h2>Results for: {{ number }}</h2>
+            <p><strong>Timezone:</strong> {{ time }}</p>
+            <p><strong>Carrier:</strong> {{ car }}</p>
+            <p><strong>Region:</strong> {{ reg }}</p>
+        {% elif error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
